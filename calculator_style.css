@@ -1,0 +1,87 @@
+img.banner {
+    padding-left: 15px;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+}
+
+
+.my-btn {
+    margin: 5px;
+    border: 1px solid#767676;
+    border-radius: 1px;
+    width: 72px;
+    height: 100hv;
+    background-color: #ffffff;
+    font-size: 0.83rem;
+    font-family: Menlo, 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Sans Typewriter', 'Consolas', monospace;
+    cursor: pointer;
+    user-select: none;
+}
+
+
+.my-btn:hover {
+    border: 1px solid#4a4a4a;
+}
+
+
+.my-btn:active {
+    filter: brightness(120%);
+}
+
+
+.my-btn.primary {
+    background-color: #efefef;
+    color: blue;
+}
+
+
+.my-btn.secondary {
+    background-color: #efefef;
+    color: red;
+}
+
+.my-btn.execute {
+    background-color: #efefef;
+    width: 159px;
+}
+
+.my-btn.primary:hover {
+    background-color: #e5e5e5;
+}
+
+.my-btn.secondary:hover {
+    background-color: #e5e5e5;
+}
+
+.my-btn.execute:hover {
+    background-color: #e5e5e5;
+}
+
+body {
+    font-family: serif;
+    background-color: #ffffff;
+    text-align: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+
+div.line {
+    margin-left: 39%;
+    margin-right: 39%;
+    height: 1px;
+    background-color: #76767f;
+}
+  
+.result {
+    margin-left: 39%;
+    margin-right: 39%;
+    margin-bottom: 1em;
+    height: 3em;
+    padding-right: 1em;
+    background-color: #eeeeff;
+    text-align: right;
+    color: black;
+    font-size: 0.83rem;
+    font-family: monospace;
+    line-height: 50px;
+}
