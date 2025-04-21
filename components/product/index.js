@@ -1,15 +1,15 @@
 export class ProductComponent {
     constructor(parent) {
-        this.parent = parent
+        this.parent = parent;
     }
 
     getHTML(data) {
         return (
             `
-                <div class="card mb-3" style="width: 540px;">
+                <div class="card mb-3" style="width: 540px; margin-top: 20px;">
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img src="${data.src}" class="img-fluid" alt="картинка">
+                            <img src="${data.src}" class="img-fluid rounded-start" alt="картинка">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -19,12 +19,12 @@ export class ProductComponent {
                         </div>
                     </div>
                 </div>
-            `
-        )
+            `   
+        );
     }
 
     render(data) {
-        const html = this.getHTML(data)
-        this.parent.insertAdjacentHTML('beforeend', html)
+        const html = this.getHTML(data);
+        this.parent.insertAdjacentHTML('beforeend', html);
     }
 }
