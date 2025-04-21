@@ -1,6 +1,8 @@
-import {MainPage} from "./pages/main/index.js";
+import { MainPage } from "./pages/main/index.js";
 
 const root = document.getElementById('root');
 
-const mainPage = new MainPage(root);
-mainPage.render();
+if (root){
+    const mainPage = new MainPage(root);
+    mainPage.render();
+}
