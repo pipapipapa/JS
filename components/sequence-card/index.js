@@ -1,13 +1,11 @@
-import { concatenate } from "../../utils/concatenate.js";
-
 export class SequenceCardComponent{
     constructor(parent){
         this.parent = parent;
     }
 
     getHTML(data){
-        const termsPreview = concatenate(data.terms.slice(0, 15), ', ') + (data.terms.length > 15 ? '...' : '');
-        const keywordsPreview = concatenate(data.keywords.slice(0, 5), ', ') + (data.keywords.length > 5 ? '...' : '');
+        const termsPreview = data.terms.slice(0, 15).join(', ') + (data.terms.length > 15 ? '...' : '');
+        const keywordsPreview = data.keywords.slice(0, 5).join(', ') + (data.keywords.length > 5 ? '...' : '');
 
 
         return (
@@ -18,7 +16,7 @@ export class SequenceCardComponent{
                         <p class="card_text sequence-name">${data.name.substring(0, 100)}...</p>
                         <p class="sequence_extra_info info_terms">Terms: ${termsPreview}</p>
                         <p class="sequence_extra_info">Keywords: ${keywordsPreview}</p>
-                        <button class="btn" id="click-card-${data.id}" data-id="${data.id}">more</button>
+                        <button class="btn btn-outline-dark" id="click-card-${data.id}" data-id="${data.id}">Подробнее</button>
                     </div>
                 </div>
             `
