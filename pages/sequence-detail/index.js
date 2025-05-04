@@ -35,30 +35,30 @@ export class SequenceDetailPage{
                     <p class="sequence_author"><em>Author: ${this.sequenceData.author || 'N/A'}</em></p>
 
                     <div class="card detail-card">
-                        <div class="card_header">Sequence Terms</div>
+                        <div class="card_header">Члены последовательности</div>
                         <div class="card_body">
                             <p id="sequence_display" class="sequence_terms_display">
                             </p>
                             <hr>
                             <div class="term_controls">
-                                <span>Separator:</span>
-                                <input type="text" class="inp_text_small" id="separator_input" value=", " placeholder="e.g., ', '">
-                                <button class="btn" id="concat_btn">Format Terms</button>
+                                <span>Разделитель:</span>
+                                <input type="text" class="inp_text_small" id="separator_input" value=", " placeholder="прим., ', '">
+                                <button class="btn btn-outline-secondary btn-sm" id="concat_btn">Форматирование членов</button>
                             </div>
                             <div class="term_controls">
-                                <span>Move from index:</span>
+                                <span>С позиции:</span>
                                 <input type="number" class="inp_num_small" id="move_from_input" min="0">
-                                <span>to index:</span>
+                                <span>на позицию:</span>
                                 <input type="number" class="inp_num_small" id="move_to_input" min="0">
-                                <button class="btn" id="move_btn">Move Term</button>
-                                <button class="btn" id="reset_terms_btn">Reset Terms</button>
+                                <button class="btn btn-outline-secondary btn-sm" id="move_btn">Переместить член</button>
+                                <button class="btn btn-outline-secondary btn-sm" id="reset_terms_btn">Сброс</button>
                             </div>
                         </div>
                     </div>
 
                     <div class="card detail-card">
                         <div class="card_body">
-                            <p><strong>Keywords:</strong> <span id="keywords_display">${concatenate(this.sequenceData.keywords || [], ' | ')}</span></p>
+                            <p><strong>Ключевые слова:</strong> <span id="keywords_display">${concatenate(this.sequenceData.keywords || [], ' | ')}</span></p>
                             <hr>
                             <div id="sum_unique_result" class="analysis_result">
                             </div>
@@ -116,7 +116,7 @@ export class SequenceDetailPage{
         const sum = sumUnique(this.displayTerms);
         const resultElement = document.getElementById('sum_unique_result');
         if (resultElement){
-            resultElement.textContent = `Sum of unique terms: ${sum}`;
+            resultElement.textContent = `Сумма уникальных отображенных членов: ${sum}`;
         }
     }
 
@@ -127,14 +127,14 @@ export class SequenceDetailPage{
         if (!resultElement) return;
 
         if (anagramGroups.length > 0){
-            let output = "<strong>Anagram Groups (Keywords):</strong>\n";
+            let output = "<strong>Группы анаграмм (по ключам):</strong>\n";
             anagramGroups.forEach(group =>{
                 output += `- [${group.join(', ')}]\n`;
             });
             resultElement.innerHTML = output;
         }
         else{
-            resultElement.textContent = "No anagram groups found among keywords.";
+            resultElement.textContent = "Нет таких.";
         }
     }
 

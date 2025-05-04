@@ -1,3 +1,6 @@
+.main_page{
+    margin-left: 2%;
+}
 
 .sequence_terms_display {
     font-size: 0.83rem;
@@ -5,6 +8,7 @@
 }
 
 .sequence-id {
+    border-radius: 3px;
     background-color: #eeeeff;
     font-size: 1.5rem;
     font-family: monospace;
@@ -18,7 +22,7 @@
 #main_page .card {
     
     padding-bottom: 10px;
-    border: 1px solid #bbb;
+    border: 3px solid #bbb;
     width: 31%;
 }
 
@@ -36,4 +40,17 @@
 .info_terms {
     font-size: 0.83rem;
     font-family: Menlo, 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Sans Typewriter', 'Consolas', monospace;
+}
+
+
+.btn-outline-dark{
+    margin-top: auto;
+}
+
+.input-group{
+    width: 40%;
+}
+
+.btn-outline-secondary{
+    margin-bottom: 5px;
 }
