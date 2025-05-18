@@ -31,56 +31,6 @@ export class MainPage{
             `
         )
     }
-/*
-    renderCards(){
-         const gallery = this.pageRoot.querySelector('.gallery');
-         if (!gallery){
-            return;
-         }
-
-         gallery.innerHTML = "";
-
-         const keyword = this.filterKeyword.toLowerCase();
-
-         this.data.forEach((item) => {
-             const nameMatch = item.name.toLowerCase().includes(keyword);
-             const idMatch = item.id.toLowerCase().includes(keyword);
-             const keywordMatch = item.keywords.some(k => k.toLowerCase().includes(keyword));
-
-             if (!keyword || nameMatch || idMatch || keywordMatch){
-                 const sequenceCard = new SequenceCardComponent(gallery);
-                 sequenceCard.render(item, this.clickCard.bind(this));
-             }
-         });
-    }
-
-    render(){
-        this.parent.innerHTML = '';
-        const html = this.getHTML();
-        this.parent.insertAdjacentHTML('beforeend', html);
-
-        const filterInput = this.pageRoot.querySelector('#filter_keyword');
-        const filterButton = this.pageRoot.querySelector('#filter_btn');
-        const addButton = this.pageRoot.querySelector('#add_card_btn');
-        const deleteButton = this.pageRoot.querySelector('#delete_card_btn');
-
-        filterInput.addEventListener('input', (e) => {
-            this.filterKeyword = e.target.value;
-             this.renderCards();
-        });
-
-         filterButton.addEventListener('click', () => {
-             this.filterKeyword = filterInput.value || '';
-             this.renderCards();
-         });
-
-        addButton.addEventListener('click', this.addCard.bind(this));
-        deleteButton.addEventListener('click', this.removeCard.bind(this));
-
-        this.renderCards();
-    }
-*/
-
 
     getData() {
         ajax.get(sequenceUrls.getSequences(), (data) => {
