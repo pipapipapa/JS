@@ -1,11 +1,12 @@
 import { SequenceCardComponent } from "../../components/sequence-card/index.js";
 import { SequenceDetailPage } from "../sequence-detail/index.js";
-import { sequenceData } from "../../main.js";
+import { ajax } from "../../modules/ajax.js";
+import { sequenceUrls } from "../../modules/sequenceUrls.js";
+
 
 export class MainPage{
     constructor(parent){
         this.parent = parent;
-        this.data = sequenceData.getData();
         this.filterKeyword = "";
     }
 
@@ -30,7 +31,7 @@ export class MainPage{
             `
         )
     }
-
+/*
     renderCards(){
          const gallery = this.pageRoot.querySelector('.gallery');
          if (!gallery){
@@ -78,27 +79,90 @@ export class MainPage{
 
         this.renderCards();
     }
+*/
 
+
+    getData() {
+        ajax.get(sequenceUrls.getSequences(), (data) => {
+            this.renderCards(data);
+        })
+    }
+
+    renderCards(data){
+        const gallery = this.pageRoot.querySelector('.gallery');
+        if (!gallery){
+            return;
+        }
+
+        gallery.innerHTML = "";
+
+        data.forEach((item) => {
+            const keyword = this.filterKeyword.toLowerCase();
+
+            const nameMatch = item.name.toLowerCase().includes(keyword);
+            const idMatch = item.id.toLowerCase().includes(keyword);
+            const keywordMatch = item.keywords.some(k => k.toLowerCase().includes(keyword));
+
+            if (!keyword || nameMatch || idMatch || keywordMatch){
+                const sequenceCard = new SequenceCardComponent(gallery);
+                sequenceCard.render(item, this.clickCard.bind(this));
+            }
+        });
+    }
+
+    render(){
+        this.parent.innerHTML = '';
+        const html = this.getHTML();
+        this.parent.insertAdjacentHTML('beforeend', html);
+
+        const filterInput = this.pageRoot.querySelector('#filter_keyword');
+        const filterButton = this.pageRoot.querySelector('#filter_btn');
+        const addButton = this.pageRoot.querySelector('#add_card_btn');
+        const deleteButton = this.pageRoot.querySelector('#delete_card_btn');
+
+        filterButton.addEventListener('click', () => {
+            this.filterKeyword = filterInput.value || '';
+            this.getData();
+        });
+
+        addButton.addEventListener('click', this.addCard.bind(this));
+        deleteButton.addEventListener('click', this.removeCard.bind(this));
+
+        this.getData();
+    }
 
     clickCard(e){
         const cardId = e.target.dataset.id;
-        const sequencePage = new SequenceDetailPage(this.parent, cardId, sequenceData.getData.bind(this));
+        const sequencePage = new SequenceDetailPage(this.parent, cardId);
         sequencePage.render();
     }
 
     addCard(){
-        if (this.data.length > 0){
-            const newCardData = JSON.parse(JSON.stringify(this.data[0]));
-            newCardData.id = `${newCardData.id}`;
-            this.data.push(newCardData);
-            this.renderCards();
-        }
+        ajax.get(sequenceUrls.getSequences(), (data) => {
+            if (data.length < 0){
+                return
+            }
+
+            const firstCard = data[0]
+            const newCardData = {
+                name: `${firstCard.name}`,
+                terms: [...firstCard.terms],
+                keywords: [...firstCard.keywords],
+                author: firstCard.author
+            };
+            ajax.post(sequenceUrls.createSequence(), newCardData);
+            this.renderCards(data);
+        })
     }
 
     removeCard(){
-        if (this.data.length > 0){
-            this.data.pop();
-            this.renderCards();
-        }
+        ajax.get(sequenceUrls.getSequences(), (data) => {
+            if (data.length < 0){
+                return
+            }
+            
+            ajax.delete(sequenceUrls.removeSequenceById(data[0].id));
+            this.renderCards(data);
+        })
     }
 }

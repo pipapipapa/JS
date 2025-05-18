@@ -1,34 +1,27 @@
 import { BackButtonComponent } from "../../components/back-button/index.js";
 import { MainPage } from "../main/index.js";
+import { ajax } from "../../modules/ajax.js";
+import { sequenceUrls } from "../../modules/sequenceUrls.js";
 
 
 export class SequenceDetailPage{
-    constructor(parent, id, getDataFunc){
+    constructor(parent, id){
         this.parent = parent;
-        this.id = id;
-        this.getDataFunc = getDataFunc;
-
-        const allData = this.getDataFunc();
-        this.sequenceData = allData.find(seq => seq.id === this.id);
-
-        if (!this.sequenceData){
-             this.sequenceData = { id: this.id, name: "Error: Not Found", terms: [], keywords: [], author: "" };
-        }
-
-        this.displayTerms = [...this.sequenceData.terms];
+        this.id = id;      
+        this.sequenceData = [];  
     }
 
     get pageRoot(){
         return document.getElementById('sequence_detail_page');
     }
 
-    getHTML(){
+    getHTML(data){
         return (
             `
                 <div id="sequence_detail_page">
-                    <p class="sequence-id">${this.sequenceData.id}</p>
-                    <p><strong>${this.sequenceData.name}</strong></p>
-                    <p class="sequence_author"><em>Author: ${this.sequenceData.author || 'N/A'}</em></p>
+                    <p id="sequence_id" class="sequence-id">'N/A'</p>
+                    <p id="sequence_name">'N/A'<strong></strong></p>
+                    <p id="sequence_author"><em>Author: 'N/A'</em></p>
 
                     <div class="card detail-card">
                         <div class="card_header">Sequence Terms</div>
@@ -47,12 +40,33 @@ export class SequenceDetailPage{
         mainPage.render();
     }
 
-    displaySequenceTerms(){
-        const formattedTerms = this.displayTerms.join(', ');
+    getData() {
+        ajax.get(sequenceUrls.getSequenceById   (this.id), (data) => {
+            this.renderSequencePage(data);
+    })
+}
+
+    renderSequencePage(sequenceData){
+        const formattedTerms = sequenceData.terms.join(', ');
 
         const displayElement = document.getElementById('sequence_display');
         if (displayElement){
             displayElement.textContent = formattedTerms;
+        }
+        
+        const sequenceIdElement = document.getElementById('sequence_id');
+        if (displayElement){
+            sequenceIdElement.textContent = this.id;
+        }
+
+        const sequenceNameElement = document.getElementById('sequence_name');
+        if (displayElement){
+            sequenceNameElement.textContent = sequenceData.name;
+        }
+
+        const sequenceAuthorElement = document.getElementById('sequence_author');
+        if (displayElement){
+            sequenceAuthorElement.textContent = sequenceData.author;
         }
     }
 
@@ -65,6 +79,6 @@ export class SequenceDetailPage{
         const backButton = new BackButtonComponent(this.pageRoot);
         backButton.render(this.clickBack.bind(this));
 
-        this.displaySequenceTerms();
+        this.getData();
     }
 }
