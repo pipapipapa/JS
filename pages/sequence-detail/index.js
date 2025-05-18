@@ -76,7 +76,7 @@ export class SequenceDetailPage{
         mainPage.render();
     }
 
-    displayConcatenatedTerms(){
+    displayConcatenatedSequenceTerms(){
         const separatorInput = document.getElementById('separator_input');
         const separator = separatorInput.value !== undefined ? separatorInput.value : ', ';
 
@@ -88,7 +88,7 @@ export class SequenceDetailPage{
         }
     }
 
-    performMoveElement(){
+    moveSequenceElement(){
         const fromInput = document.getElementById('move_from_input');
         const toInput = document.getElementById('move_to_input');
         const fromIndex = parseInt(fromInput.value || "-1", 10);
@@ -102,17 +102,17 @@ export class SequenceDetailPage{
         }
 
         moveElement(this.displayTerms, fromIndex, toIndex);
-        this.displayConcatenatedTerms();
-        this.calculateAndDisplaySumUnique();
+        this.displayConcatenatedSequenceTerms();
+        this.displaySumUniqueTerms();
     }
 
-    resetTermsDisplay(){
+    resetSequenceTermsDisplay(){
         this.displayTerms = [...this.sequenceData.terms];
-        this.displayConcatenatedTerms();
-        this.calculateAndDisplaySumUnique();
+        this.displayConcatenatedSequenceTerms();
+        this.displaySumUniqueTerms();
     }
 
-    calculateAndDisplaySumUnique(){
+    displaySumUniqueTerms(){
         const sum = sumUnique(this.displayTerms);
         const resultElement = document.getElementById('sum_unique_result');
         if (resultElement){
@@ -120,7 +120,7 @@ export class SequenceDetailPage{
         }
     }
 
-    findAndDisplayAnagrams(){
+    findAndDisplayKeywordAnagrams(){
         const keywords = this.sequenceData.keywords || [];
         const anagramGroups = anagram(keywords);
         const resultElement = document.getElementById('anagram_result');
@@ -139,9 +139,9 @@ export class SequenceDetailPage{
     }
 
     addEventListeners(){
-         document.getElementById('concat_btn').addEventListener('click', this.displayConcatenatedTerms.bind(this));
-         document.getElementById('move_btn').addEventListener('click', this.performMoveElement.bind(this));
-         document.getElementById('reset_terms_btn').addEventListener('click', this.resetTermsDisplay.bind(this));
+         document.getElementById('concat_btn').addEventListener('click', this.displayConcatenatedSequenceTerms.bind(this));
+         document.getElementById('move_btn').addEventListener('click', this.moveSequenceElement.bind(this));
+         document.getElementById('reset_terms_btn').addEventListener('click', this.resetSequenceTermsDisplay.bind(this));
     }
 
     render(){
@@ -152,10 +152,10 @@ export class SequenceDetailPage{
         const backButton = new BackButtonComponent(this.pageRoot);
         backButton.render(this.clickBack.bind(this));
 
-        this.displayConcatenatedTerms();
+        this.displayConcatenatedSequenceTerms();
 
-        this.calculateAndDisplaySumUnique();
-        this.findAndDisplayAnagrams();
+        this.displaySumUniqueTerms();
+        this.findAndDisplayKeywordAnagrams();
 
         this.addEventListeners();
     }
