@@ -1,5 +1,6 @@
 import { SequenceCardComponent } from "../../components/sequence-card/index.js";
 import { SequenceDetailPage } from "../sequence-detail/index.js";
+import { SequenceEditPage } from "../sequence-edit/index.js";
 import { ajax } from "../../modules/ajax.js";
 import { sequenceUrls } from "../../modules/sequenceUrls.js";
 
@@ -22,7 +23,7 @@ export class MainPage{
                     <div class="controls_form">
                         <input type="text" class="input-group input-group-sm mb-3" id="filter_keyword" placeholder="Поиск по ключам и ID">
                         <button class="btn btn-outline-secondary btn-sm" id="filter_btn">Поиск</button>
-                        <button class="btn btn-outline-secondary btn-sm" id="add_card_btn">Добавить</button>
+                        <button class="btn btn-outline-secondary btn-sm" id="add_card_btn">Добавить/редактировать</button>
                         <button class="btn btn-outline-secondary btn-sm" id="delete_card_btn">Удалить</button>
                     </div>
                     <div class="gallery">
@@ -88,21 +89,8 @@ export class MainPage{
     }
 
     addCard(){
-        ajax.get(sequenceUrls.getSequences(), (data) => {
-            if (data.length < 0){
-                return
-            }
-
-            const firstCard = data[0]
-            const newCardData = {
-                name: `${firstCard.name}`,
-                terms: [...firstCard.terms],
-                keywords: [...firstCard.keywords],
-                author: firstCard.author
-            };
-            ajax.post(sequenceUrls.createSequence(), newCardData);
-            this.renderCards(data);
-        })
+        const sequenceEditPage = new SequenceEditPage(this.parent);
+        sequenceEditPage.render();
     }
 
     removeCard(){

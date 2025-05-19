@@ -8,14 +8,13 @@ export class SequenceDetailPage{
     constructor(parent, id){
         this.parent = parent;
         this.id = id;      
-        this.sequenceData = [];  
     }
 
     get pageRoot(){
         return document.getElementById('sequence_detail_page');
     }
 
-    getHTML(data){
+    getHTML(){
         return (
             `
                 <div id="sequence_detail_page">
@@ -44,7 +43,7 @@ export class SequenceDetailPage{
         ajax.get(sequenceUrls.getSequenceById   (this.id), (data) => {
             this.renderSequencePage(data);
     })
-}
+    }
 
     renderSequencePage(sequenceData){
         const formattedTerms = sequenceData.terms.join(', ');

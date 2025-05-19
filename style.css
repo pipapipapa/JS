@@ -26,6 +26,12 @@
     width: 31%;
 }
 
+#sequence_edit_page .card {
+    padding-bottom: 10px;
+    border: 3px solid #bbb;
+    width: 41%;
+}
+
 .gallery {
     padding-top: 15px;
     display: flex;
@@ -47,6 +53,27 @@
     margin-top: auto;
 }
 
-.input-group{
+#sequence_edit_page .btn-outline-dark{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 28%;
     width: 40%;
+}
+
+#sequence_edit_page .sequence-id {
+    border-radius: 3px;
+    background-color: #eeeeff;
+    font-size: 1rem;
+    font-family: monospace;
+    line-height: 50px;
+}
+
+#main .input-group{
+    width: 40%;
+}
+
+#sequence_edit_page .input-group{
+    margin-top: 2%;
+    margin-left: 2%;
+    width: 94%;
 }
