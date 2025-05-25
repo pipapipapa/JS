@@ -16,8 +16,8 @@ export class SequenceCardComponent{
                     <div class="card_body">
                         <h5 class="card_title sequence-id">${data.id}</h5>
                         <p class="card_text sequence-name">${data.name.substring(0, 100)}...</p>
-                        <p class="sequence_extra_info info_terms">Terms: ${termsPreview}</p>
-                        <p class="sequence_extra_info">Keywords: ${keywordsPreview}</p>
+                        <p class="sequence_extra_info info_terms">Члены: ${termsPreview}</p>
+                        <p class="sequence_extra_info">Ключи: ${keywordsPreview}</p>
                         <button class="btn btn-outline-dark" id="click-card-${data.id}" data-id="${data.id}">Подробнее</button>
                     </div>
                 </div>

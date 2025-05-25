@@ -32,7 +32,7 @@ export class SequenceDetailPage{
                 <div id="sequence_detail_page">
                     <p class="sequence-id">${this.sequenceData.id}</p>
                     <p><strong>${this.sequenceData.name}</strong></p>
-                    <p class="sequence_author"><em>Author: ${this.sequenceData.author || 'N/A'}</em></p>
+                    <p class="sequence_author"><em>Автор: ${this.sequenceData.author || 'N/A'}</em></p>
 
                     <div class="card detail-card">
                         <div class="card_header">Члены последовательности</div>
